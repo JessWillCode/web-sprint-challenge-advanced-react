@@ -3,7 +3,7 @@ import axios from "axios";
 
 export default class PlantList extends Component {
   state = {
-    plants:[]
+    plants: []
   }
   // when the component mounts:
   //   - fetch data from the server endpoint - http://localhost:3333/plants
@@ -12,9 +12,10 @@ export default class PlantList extends Component {
   /*********  DON'T CHANGE ANYTHING IN THE RENDER FUNCTION *********/
  
   componentDidMount() {
-    axios.get('https://api.disneyapi.dev/characters')
+    console.log('I am mounted')
+    axios.get('http://localhost:3333/plants')
     .then(res => {
-      console.log(res.data.data);
+      console.log(res);
       this.setState({
         ...this.state,
         plants: res.data.data
@@ -30,7 +31,7 @@ export default class PlantList extends Component {
       <main className="plant-list">
         {this.state.plants.map((plant) => (
           <div className="plant-card" key={plant.id} data-testid="plant-card">
-            <img className="plant-image" width='200' src={"https://static.wikia.nocookie.net/disney/images/3/3f/Profile_-_Abu.png"} alt={plant.name} />
+            <img className="plant-image" src={plant.img} alt={plant.name} />
             <div className="plant-details">
               <h2 className="plant-name">{plant.name}</h2>
               <p className="plant-scientific-name">{plant.scientificName}</p>

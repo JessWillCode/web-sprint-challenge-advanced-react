@@ -11,22 +11,26 @@ export default class PlantList extends Component {
 
   /*********  DON'T CHANGE ANYTHING IN THE RENDER FUNCTION *********/
  
-  // componentDidMount() {
-  //   axios.get('http://localhost:3333/plants')
-  //   .then(res => {
-  //     console.log(res);
-  //   })
-  //   .catch(err => {
-  //     console.log(err);
-  //   })
-  // }
+  componentDidMount() {
+    axios.get('https://api.disneyapi.dev/characters')
+    .then(res => {
+      console.log(res.data.data);
+      this.setState({
+        ...this.state,
+        plants: res.data.data
+      })
+    })
+    .catch(err => {
+      console.log(err);
+    })
+  }
 
   render() {
     return (
       <main className="plant-list">
         {this.state.plants.map((plant) => (
           <div className="plant-card" key={plant.id} data-testid="plant-card">
-            <img className="plant-image" src={plant.img} alt={plant.name} />
+            <img className="plant-image" width='200' src={"https://static.wikia.nocookie.net/disney/images/3/3f/Profile_-_Abu.png"} alt={plant.name} />
             <div className="plant-details">
               <h2 className="plant-name">{plant.name}</h2>
               <p className="plant-scientific-name">{plant.scientificName}</p>
